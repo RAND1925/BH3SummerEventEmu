@@ -17,8 +17,7 @@ class Seele(Character):
         self.log_skill(skill_name)
         self.is_white = not self.is_white
         log(f"【{self.name}】的当前状态为{'纯白' if self.is_white else '漆黑'}")
-        if self.skills_enabled:
-            self.拜托了另一个我()
+        self.拜托了另一个我()
 
     def 拜托了另一个我(self):
         skill_name = "拜托了另一个我"
@@ -33,6 +32,6 @@ class Seele(Character):
             self.defence -= 5
 
     def move(self, turn):
-        if self.skills_enabled:
-            self.我换我自己()
+
+        self.我换我自己()
         Character.move(self, turn)

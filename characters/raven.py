@@ -31,9 +31,8 @@ class Raven(Character):
         self.不是针对你()
 
     def cause_damage(self, damage: Damage):
-        if self.skills_enabled:
-            if self.针对你:
-                damage.value = damage.value.add_percent(25)
+        if self.针对你:
+            damage.value = damage.value.add_percent(25)
         Character.cause_damage(self, damage)
 
     def extra_attack(self):

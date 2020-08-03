@@ -39,7 +39,7 @@ class DoubleBoundedInteger(LowerBoundedInteger):
 
     @classmethod
     def double_adjust(cls, value):
-        return cls.lower_adjust(cls.upper_adjust(cls.lower_adjust(value)))
+        return cls.upper_adjust(cls.lower_adjust(value))
 
     def __new__(cls, value):
         return super().__new__(cls, cls.double_adjust(value))

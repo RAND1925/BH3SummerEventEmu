@@ -29,8 +29,8 @@ class Theresas(Character):
             self.cause_damage(damage)
 
 
-    def normal_attack(self):
-        Character.normal_attack(self)
+    def move(self, turn):
+        Character.move(self, turn)
         if self.skills_enabled:
             self.血犹大第一可爱()
 

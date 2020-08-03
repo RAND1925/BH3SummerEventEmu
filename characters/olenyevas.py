@@ -1,4 +1,4 @@
-﻿from character import Character, Damage
+﻿from character import Character, Damage, Buff
 from util import roll,log, LowerBoundedInteger
 from dataclasses import dataclass
 
@@ -12,8 +12,20 @@ class Olenyevas(Character):
     is_multiple: bool = True
     extra_attack_turn: int = 0
 
+    use_extra_attack: bool = False
+
+    class 超级头槌(Buff):
+        name = "超级头槌"
+        def on_turn_start(self):
+            self.target.use_extra_attack = True
+            self.lasting -= 1
+
+        def on_turn_end(self):
+            if self.lasting == 0:
+                self.target.use_extra_attack = False
+                log(f"【{self.target.name}】的【{self.name}】消失了")
+
     九十六度生命之水used: bool = False
-    变成星星吧used: bool = False
 
     def 九十六度生命之水(self):
         skill_name = "九十六度生命之水"
@@ -22,35 +34,23 @@ class Olenyevas(Character):
             self.log_skill(skill_name)
             self.health = 20
             log(f"【{self.name}】的当前生命值为 {self.health}")
+            self.status.append(self.超级头槌(self))
 
     def 变成星星吧(self):
         skill_name = "变成星星吧"
         self.log_skill(skill_name)
         if roll(50):
-            damageBase = 233
+            damageBase = LowerBoundedInteger(233)
         else:
-            damageBase = 50
+            damageBase = LowerBoundedInteger(50)
         damage = Damage(self.get_damage_value(damageBase), False, True)
         self.cause_damage(damage)
 
-    def move(self, turn):
-        if self.skills_enabled:
-            if self.九十六度生命之水used and not self.变成星星吧used:
-                self.变成星星吧used = True
-                self.变成星星吧()
-                return
+    def extra_attack_available(self, turn):
+        return self.skills_enabled and self.use_extra_attack
 
-        Character.move(self, turn)
-
-    '''
-    def turn(self, turn):
-        if self.九十六度生命之水used and not self.变成星星吧used:
-            self.变成星星吧used = True
-            if self.is_movable():
-                self.变成星星吧()
-        else:
-            Character.turn(self, turn)
-    '''
+    def extra_attack(self):
+        self.变成星星吧()
 
     def is_dead(self):
         if self.skills_enabled:
