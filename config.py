@@ -2,8 +2,8 @@
 
 import util
 
-util.use_log = False
-total_games = 100000 # 总局数
+util.use_log = True
+total_games = 10 # 总局数
 # 角色名参见character/__init__.py
-Ch1 = Kiana
-Ch2 = Raven
+Ch1 = Rita
+Ch2 = Mei

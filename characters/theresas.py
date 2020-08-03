@@ -24,7 +24,8 @@ class Theresas(Character):
         skill_name = "在线踢人"
         self.log_skill(skill_name)
         for i in range(5):
-            damage = Damage(self.get_damage_value(16), False, True)
+            damageBase = LowerBoundedInteger(16)
+            damage = Damage(self.get_damage_value(damageBase), False, True)
             self.cause_damage(damage)
 
 

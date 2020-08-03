@@ -51,6 +51,7 @@ class Rita(Character):
 
     # trick 丽塔的减伤效果是加给自己的
     def receive_damage(self, damage: Damage):
+        value = damage.value
         if self.魅惑成功:
             damage.value = damage.value.add_percent(-60)
         Character.receive_damage(self, damage)

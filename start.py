@@ -4,13 +4,13 @@ from characters import *
 from config import Ch1, Ch2, total_games
 
 
-faster, slower = Game.sort(Ch1(), Ch2())
+faster, slower = Game.sort((Ch1, Ch2))
 faster_wins = 0
 
 res = [0, 0, 0]
 for i in range(total_games):
     log(f"==============game: {i}================")
-    game = Game(Ch1(), Ch2())
+    game = Game(Ch1, Ch2)
     res[game.autoplay()] += 1
 
 

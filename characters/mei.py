@@ -35,8 +35,9 @@ class Mei(Character):
     def 雷电家的龙女仆(self):
         skill_name = "雷电家的龙女仆"
         self.log_skill(skill_name)
-        damage = Damage(3, True, True)
         for i in range(5):
+            damageBase = LowerBoundedInteger(3)
+            damage = Damage(damageBase, True, True)
             self.cause_damage(damage)
 
     def normal_attack(self):

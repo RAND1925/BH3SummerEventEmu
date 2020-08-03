@@ -29,7 +29,7 @@ class Kiana(Character):
     def 吃我一矛(self):
         skill_name = "吃我一矛"
         self.log_skill(skill_name)
-        damageBase = self.attack + 2 * self.enemy.defence
+        damageBase = LowerBoundedInteger(self.attack + 2 * self.enemy.defence)
         damage = Damage(self.get_damage_value(damageBase), False, True)
         self.cause_damage(damage)
         self.音量太强()

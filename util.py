@@ -1,6 +1,6 @@
 ﻿from random import randint
 
-use_log = True # 是否输出战局
+use_log = False # 是否输出战局
 
 
 def roll(x: int):

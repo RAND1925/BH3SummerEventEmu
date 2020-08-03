@@ -6,18 +6,19 @@ from character import Character
 class Game:
 
     @staticmethod
-    def sort(a: Character, b: Character):
-        return sorted((a, b), key=operator.attrgetter("speed"), reverse=True)
+    def sort(Characters):
+        return sorted(Characters, key=operator.attrgetter("speed"), reverse=True)
 
-    def __init__(self, a: Character, b: Character):
+    def __init__(self, A: type, B: type):
         # sort by speed
-        self.faster, self.slower = self.sort(a, b)
+        Faster, Slower = self.sort((A, B))
+        self.faster = Faster()
+        self.slower = Slower()
         self.faster.set_enemy(self.slower)
         self.slower.set_enemy(self.faster)
 
     def autoplay(self):
-
-        for turn in range(1, 30):
+        for turn in range(1, 50):
             log(f">>>>>>>>>>>>>>>turn: {turn}<<<<<<<<<<<<<<<<")
             self.faster.turn(turn)
             if self.slower.is_dead():
