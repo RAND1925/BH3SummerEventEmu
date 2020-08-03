@@ -25,25 +25,20 @@ class Olenyevas(Character):
 
     def 变成星星吧(self):
         skill_name = "变成星星吧"
-        if self.九十六度生命之水used:
-            if not self.变成星星吧used:
-                self.变成星星吧used = True
-                self.log_skill(skill_name)
-                if roll(50):
-                    damageBase = 233
-                else:
-                    damageBase = 50
-                damage = Damage(damageBase - self.enemy.defence, False, True)
-                self.cause_damage(damage)
-                return True
+        self.log_skill(skill_name)
+        if roll(50):
+            damageBase = 233
+        else:
+            damageBase = 50
+        damage = Damage(self.get_damage_value(damageBase), False, True)
+        self.cause_damage(damage)
 
-        return False
-
-    def turn(self, turn):
+    def move(self, turn):
         if self.九十六度生命之水used and not self.变成星星吧used:
+            self.变成星星吧used = True
             self.变成星星吧()
         else:
-            Character.turn(self, turn)
+            Character.move(self, turn)
 
     def is_dead(self):
         if not self.九十六度生命之水used:

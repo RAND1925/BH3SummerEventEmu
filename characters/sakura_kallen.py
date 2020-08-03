@@ -28,10 +28,9 @@ class SakuraKallen(Character):
         damage = Damage(25, True, True)
         self.cause_damage(damage)
 
-
-    def turn(self, turn):
+    def move(self, turn):
         self.八重樱的饭团()
-        Character.turn(self, turn)
+        Character.move(self, turn)
 
     def extra_attack(self):
         self.卡莲的饭团()

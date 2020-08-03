@@ -23,9 +23,8 @@ class Theresas(Character):
     def 在线踢人(self):
         skill_name = "在线踢人"
         self.log_skill(skill_name)
-        damage_value = 16 - self.enemy.defence
         for i in range(5):
-            damage = Damage(damage_value, False, True)
+            damage = Damage(self.get_damage_value(16), False, True)
             self.cause_damage(damage)
 
 
