@@ -1,13 +1,13 @@
 ﻿from character import Character, Damage
-from util import roll,log
+from util import roll,log, LowerBoundedInteger
 from dataclasses import dataclass
 
 
 @dataclass
 class Olenyevas(Character):
     name: str = "阿琳姐妹"
-    attack: int = 18
-    defence: int = 10
+    attack: LowerBoundedInteger = LowerBoundedInteger(18)
+    defence: LowerBoundedInteger = LowerBoundedInteger(10)
     speed: int = 10
     is_multiple: bool = True
     extra_attack_turn: int = 0
@@ -34,16 +34,28 @@ class Olenyevas(Character):
         self.cause_damage(damage)
 
     def move(self, turn):
+        if self.skills_enabled:
+            if self.九十六度生命之水used and not self.变成星星吧used:
+                self.变成星星吧used = True
+                self.变成星星吧()
+                return
+
+        Character.move(self, turn)
+
+    '''
+    def turn(self, turn):
         if self.九十六度生命之水used and not self.变成星星吧used:
             self.变成星星吧used = True
-            self.变成星星吧()
+            if self.is_movable():
+                self.变成星星吧()
         else:
-            Character.move(self, turn)
+            Character.turn(self, turn)
+    '''
 
     def is_dead(self):
-        if not self.九十六度生命之水used:
-            if Character.is_dead(self):
-                self.九十六度生命之水()
-            return False
-        else:
-            return Character.is_dead(self)
+        if self.skills_enabled:
+            if not self.九十六度生命之水used:
+                if Character.is_dead(self):
+                    self.九十六度生命之水()
+                return False
+        return Character.is_dead(self)

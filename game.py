@@ -16,8 +16,8 @@ class Game:
         self.slower.set_enemy(self.faster)
 
     def autoplay(self):
-        turn = 1
-        while True:
+
+        for turn in range(1, 30):
             log(f">>>>>>>>>>>>>>>turn: {turn}<<<<<<<<<<<<<<<<")
             self.faster.turn(turn)
             if self.slower.is_dead():
@@ -28,4 +28,4 @@ class Game:
             if self.faster.is_dead():
                 log(f"【{self.faster.name}】失败")
                 return 0
-            turn += 1
+        return 2

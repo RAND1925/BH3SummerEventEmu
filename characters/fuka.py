@@ -1,6 +1,9 @@
-﻿from character import Character, Damage
+﻿from dataclasses import dataclass
 from util import roll,log
-from dataclasses import dataclass
+from character import Character, Damage
+
+
+# undone
 
 class Fuka(Character):
     is_elemented: bool = True

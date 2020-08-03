@@ -1,13 +1,13 @@
 ﻿from character import Character, Damage
-from util import roll,log
+from util import roll,log, LowerBoundedInteger
 from dataclasses import dataclass
 
 
 @dataclass
 class Theresas(Character):
     name: str = "德丽莎"
-    attack: int = 19
-    defence: int = 12
+    attack: LowerBoundedInteger = LowerBoundedInteger(19)
+    defence: LowerBoundedInteger = LowerBoundedInteger(12)
     speed: int = 22
     extra_attack_turn: int = 3
 
@@ -30,7 +30,8 @@ class Theresas(Character):
 
     def normal_attack(self):
         Character.normal_attack(self)
-        self.血犹大第一可爱()
+        if self.skills_enabled:
+            self.血犹大第一可爱()
 
     def extra_attack(self):
         self.在线踢人()
