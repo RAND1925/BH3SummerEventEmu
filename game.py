@@ -1,10 +1,14 @@
 import operator
 from util import log
 from character import Character
-
+from typing import *
 
 class Game:
+    characters: List[Character]
 
+
+    def set_starter(character: Character):
+        
     @staticmethod
     def sort(Characters):
         return sorted(Characters, key=operator.attrgetter("speed"), reverse=True)
@@ -16,6 +20,9 @@ class Game:
         self.slower = Slower()
         self.faster.set_enemy(self.slower)
         self.slower.set_enemy(self.faster)
+
+
+    
 
     def autoplay(self):
         for turn in range(1, 50):

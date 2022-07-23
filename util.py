@@ -53,3 +53,20 @@ class DoubleBoundedInteger(LowerBoundedInteger):
     def add_percent(self, other):
         return self.__class__(round(super().__mul__(other).__divmod__(100)[0]))
 
+
+class PositiveInteger(int):
+    _lower_bound: int = 0
+
+    @classmethod
+    def lower_adjust(cls, value):
+        return max(value, cls._lower_bound)
+
+    def __new__(cls, value):
+            return super().__new__(cls, round(cls.lower_adjust(value)))
+
+    def __sub__(self, other) :
+        return self.__class__(self.lower_adjust(super().__sub__(other)))
+
+    def add_percent(self, other):
+        return self.__class__(self + round(super().__mul__(other).__divmod__(100)[0]))
+

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from util import log, DoubleBoundedInteger, LowerBoundedInteger
 
+
 class Buff:
     name: str
 
